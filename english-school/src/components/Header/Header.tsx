@@ -7,10 +7,11 @@ const Header = () => {
       <div className="container header__wrapper">
         <div className="logo">
             <img src="/src/images/logoIcon.png" alt="logo" />
-            <a href="https://outlook.office.com/mail/deeplink/compose?mailtouri=mailto%3Aschool%40englishprime.plschool@englishprime.pl">school@englishprime.pl</a>
+            <a className="logo__mail" href="https://outlook.office.com/mail/deeplink/compose?mailtouri=mailto%3Aschool%40englishprime.plschool@englishprime.pl">school@englishprime.pl</a>
         </div>
         <Navigation />
       </div>
+      
     </header>
   );
 };

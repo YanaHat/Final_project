@@ -1,0 +1,42 @@
+.contacts {
+  padding: 40px 20px;
+}
+
+.contacts-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contacts-content {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+}
+
+.contacts-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contacts-info .left,
+.contacts-info .right {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contacts-info .right {
+  gap: 40px;
+}
+
+.contacts-info .right p {
+  margin: 0;
+}
+
+.contacts-map {
+  flex: 2;
+}
+
+.contacts-map img {
+  width: 100%;
+  height: auto;
+}

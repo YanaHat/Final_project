@@ -2,6 +2,7 @@
   display: flex;
   gap: 20px;
   list-style: none;
+  font-size: 18px;
 }
 
 .burger {
@@ -12,8 +13,7 @@
   cursor: pointer;
 }
 
-/* мобильная версия */
-@media (max-width: 1024px) {
+@media (max-width: 425px) {
   .burger {
     display: block;
   }
@@ -24,8 +24,9 @@
     position: absolute;
     top: 60px;
     right: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.592);
     padding: 20px;
+    border-radius: 4px;
   }
 
   .nav__list.active {

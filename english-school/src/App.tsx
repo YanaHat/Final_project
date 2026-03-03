@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header/Header.tsx";
-import Footer from "./components/Footer/Footer.tsx";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Social from "./components/Social/Social";
 
 import About from "./pages/About/About";
 import Courses from "./pages/Courses/Courses";
@@ -9,10 +10,15 @@ import Apply from "./pages/Apply/Apply";
 import Contacts from "./pages/Contacts/Contacts";
 import News from "./pages/News/News";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+
+  const hideSocial = location.pathname === "/contacts";
+
   return (
-    <BrowserRouter>
+    <>
       <Header />
+
       <Routes>
         <Route path="/" element={<About />} />
         <Route path="/courses" element={<Courses />} />
@@ -21,9 +27,21 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/news" element={<News />} />
       </Routes>
+
+      {!hideSocial && <Social />}
+
       <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
 
 export default App;
+

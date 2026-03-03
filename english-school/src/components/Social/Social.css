@@ -1,0 +1,10 @@
+.social {
+  position: fixed;
+  right: 0;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+  background-color: transparent;
+}
