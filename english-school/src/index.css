@@ -4,8 +4,11 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --bg: white;
+  --card-bg: #ffff;
+  --input-bg: white;
+  --button-bg: #8B5BD1;
+  color: #8B5BD1;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,9 +17,9 @@
 }
 
 a {
-  font-weight: 500;
   color: #8B5BD1;
   text-decoration: none;
+  transition: color 0.3s;
 }
 a:hover {
   color: #8B5BD1;
@@ -27,8 +30,29 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  color: #8B5BD1;
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+body.dark {
+  --bg: #3b3b3b;
+  --text: #8B5BD1;
+  --card-bg: #3b3b3b;
+  --input-bg: #555;
+}
+
+header,
+footer {
+  background: var(--card-bg);
+}
+
+input,
+textarea {
+  background: var(--input-bg);
+  color: var(--text);
+}
+
 
 h1 {
   font-size: 51px;
@@ -37,17 +61,20 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 10px 24px;
+  border: none;
+  padding: 7px 20px;
   font-size: 16px;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
+  background: var(--button-bg);
+  color: #ffff;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #8B5BD1;
+  background-color: #a879ef;
+  color: #e5e5e5;
+  border: none;
 }
 button:focus,
 button:focus-visible {
@@ -56,17 +83,4 @@ button:focus-visible {
 
 .section {
   margin: 20px;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #8B5BD1;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

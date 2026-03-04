@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Social from "./components/Social/Social";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import About from "./pages/About/About";
 import Courses from "./pages/Courses/Courses";
@@ -10,9 +10,8 @@ import Apply from "./pages/Apply/Apply";
 import Contacts from "./pages/Contacts/Contacts";
 import News from "./pages/News/News";
 
-function AppContent() {
+function App() {
   const location = useLocation();
-
   const hideSocial = location.pathname === "/contacts";
 
   return (
@@ -35,13 +34,4 @@ function AppContent() {
   );
 }
 
-function App() {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-}
-
 export default App;
-

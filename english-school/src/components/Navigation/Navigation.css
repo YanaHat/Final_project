@@ -1,35 +1,114 @@
+.nav {
+  position: relative;
+  z-index: 1000;
+}
+
 .nav__list {
   display: flex;
   gap: 20px;
   list-style: none;
-  font-size: 18px;
+  font-weight: 500;
+  color: #8B5BD1;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav__list a.active {
+  border-bottom: 2px solid #B598FF;
 }
 
 .burger {
   display: none;
-  font-size: 24px;
+  position: relative;
+  width: 30px;
+  height: 20px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
-@media (max-width: 425px) {
+.burger span,
+.burger::before,
+.burger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #6A4BC1; 
+  transition: all 0.3s ease-in-out;
+}
+
+.burger::before { top: 0; }
+.burger span { top: 9px; }
+.burger::after { bottom: 0; }
+
+.burger.open::before {
+  transform: translateY(9px) rotate(45deg);
+}
+.burger.open span {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.burger.open::after {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+@media (max-width: 1440px) {
+  .nav__list a {
+    font-size: 22px;
+    display: block;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav__list a {
+    font-size: 20px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav__list a {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
   .burger {
     display: block;
+    z-index: 1001;
   }
 
   .nav__list {
-    display: none;
+    display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.592);
-    padding: 20px;
-    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    
+    position: fixed; 
+    top: 0;
+    right: -100%;
+    width: 250px;
+    height: 100vh;
+    
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px); 
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 10px;
   }
 
   .nav__list.active {
-    display: flex;
+    right: 0; 
+  }
+
+  .nav__list a {
+    font-size: 18px;
+    display: block;
+    padding: 10px;
   }
 }

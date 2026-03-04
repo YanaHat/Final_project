@@ -1,43 +1,59 @@
-import "./About.css";
+import './About.css';
 
 const About = () => {
   return (
-    <section className="about">
+    <section className="about-section">
       <div className="container">
-        <div className="about">
-            <h1>Школа английского языка</h1>
-            <div className="aboutInfo">
-                <div className="infoCard">
-                    <img src="" alt="" />
-                    <p className="info">Хорошее расположение в самом сердце города. Удобные классы с интерактивной доской</p>
-                </div>
-                <div className="infoCard">
-                    <img src="" alt="" />
-                    <p className="info">Онлайн и оффлайн занятия. Опытные преподаватели. Уровни от A1 до C1.</p>
-                </div>
+        <div className="hero-purple">
+          <h2 className="hero-title">О школе English Prime</h2>
+          
+          <div className="hero-grid">
+            <div className="hero-image">
+              <img src="/src/assets/images/centrum.jpg" alt="Центр города" />
             </div>
-            <form className="form">
-                <img src="/src/images/formImg.png" alt="" />
-                <div>
-                    <h2>Записаться на пробное занятие</h2>
-                    <span>Имя</span>
-                    <input type="text" />
-                    <span>Телефон</span>
-                    <input type="phone" />
-                    <button>Записаться</button>
-                    <p>Нажимая кнопу «Отправить» Вы соглашаетесь с политикой конфиденциальности</p>
-                </div>
-            </form>
-            <div className="certificates">
-                <span>Сертификаты преподавателей</span>
-                <div>
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                    <img src="" alt="" />
-                </div>
+            <div className="hero-text-card">
+              <p>Хорошее расположение в самом сердце города</p>
+              <p>Удобные классы с интерактивной доской</p>
             </div>
+
+            <div className="hero-text-card">
+              <p>Онлайн и оффлайн занятия</p>
+              <p>Опытные преподаватели</p>
+              <p>Уровни от A1 до C1</p>
+            </div>
+            <div className="hero-image">
+              <img src="/src/assets/images/class.jpg" alt="Занятия" />
+            </div>
+          </div>
         </div>
+
+        <div className="form-container">
+          <div className="form-image">
+            <img src="/src/assets/images/form.png" alt="Иллюстрация" />
+          </div>
+          <form className="contact-form">
+            <h3>Записаться на пробное занятие</h3>
+            <label>Имя*</label>
+            <input type="text" placeholder="Ваше имя" required />
+            
+            <label>Телефон*</label>
+            <input type="tel" placeholder="Ваш телефон" required />
+            
+            <button type="submit" className="submit-btn">Отправить</button>
+            <p className="privacy-text">*Нажимая кнопку «Отправить» Вы соглашаетесь с <a href="https://englishprime.pl/politika/">политикой конфиденциальности</a></p>
+          </form>
+        </div>
+
+        <div className="certificates-section">
+          <h3 className="certificates-title">Сертификаты преподавателей</h3>
+          <div className="certificates-grid">
+            <img src="/src/assets/images/cert1.png" alt="сертификат" />
+            <img src="/src/assets/images/cert2.png" alt="сертификат" />
+            <img src="/src/assets/images/cert3.png" alt="сертификат" />
+            <img src="/src/assets/images/cert4.png" alt="сертификат" />
+          </div>
+        </div>
+
       </div>
     </section>
   );

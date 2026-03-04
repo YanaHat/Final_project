@@ -1,0 +1,407 @@
+.container {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.hero-purple {
+    background-color: #B598FF;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+}
+
+.hero-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.hero-text-card {
+    background-color: #ffffff;
+    color: #6A4BC1;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.form-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.contact-form input {
+    border: 1px solid #6A4BC1;
+}
+
+.certificates-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.certificates-title {
+    align-self: center;
+}
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+}
+
+.certificates-grid img {
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 320px) {
+    .hero-purple, 
+    .form-container, 
+    .certificates-section {
+        width: 100%; 
+        box-sizing: border-box; 
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-title {
+        font-size: 1.2rem; 
+    }
+
+    .form-image {
+        display: none;
+    }
+
+    .hero-text-card {
+        font-size: 0.85rem; padding: 15px; 
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        align-self: center;
+    }
+
+    .contact-form label {
+        margin-bottom: 5px;
+    }
+
+    .contact-form input {
+        padding: 7px;
+        margin-bottom: 5px;
+    }
+
+    .submit-btn {
+        margin-top: 5px;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 425px) {
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        align-self: center;
+    }
+
+    .contact-form label {
+        margin-bottom: 5px;
+    }
+
+    .contact-form input {
+        padding: 7px;
+        margin-bottom: 5px;
+    }
+
+    .submit-btn {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container { 
+        padding: 30px; 
+    }
+    
+    .hero-title { 
+        font-size: 2rem; 
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr 1fr; 
+    }
+    
+    .hero-grid > div:nth-child(3) { order: 4; }
+    .hero-grid > div:nth-child(4) { order: 3; }
+
+    .form-container {
+        flex-direction: row; 
+        justify-content: space-around;
+    }
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        align-self: center;
+    }
+
+    .contact-form label {
+        margin-bottom: 5px;
+    }
+
+    .contact-form input {
+        padding: 7px;
+        margin-bottom: 5px;
+    }
+
+    .submit-btn {
+        margin-top: 5px;
+        padding: 5px 0;
+    }
+}
+
+@media (min-width: 800px) {
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+
+    .contact-form h3 {
+        align-self: center;
+    }
+
+    .contact-form label {
+        margin-bottom: 5px;
+    }
+
+    .contact-form input {
+        padding: 7px;
+        margin-bottom: 5px;
+    }
+
+    .submit-btn {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1000px; 
+    }
+    
+    .hero-purple { 
+        padding: 40px; 
+    }
+    
+    .hero-text-card {
+        font-size: 1.1rem;
+        padding: 30px;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        font-size: 1.3rem;
+        align-self: center;
+    }
+
+    .contact-form label {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .contact-form input {
+        font-size: 0.8rem;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    .submit-btn {
+        margin-top: 5px;
+        font-size: 1rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1152px) {
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        font-size: 1.4rem;
+        align-self: center;
+    }
+
+    .contact-form label {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .contact-form input {
+        font-size: 0.9rem;
+        padding: 10px;
+        margin-bottom: 8px;
+    }
+
+    .submit-btn {
+        margin-top: 8px;
+        font-size: 1.1rem;
+    }
+
+    .privacy-text {
+        font-size: 1.1rem;
+    }
+
+    .certificates-title {
+        font-size: 1.4rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact-form h3 {
+        font-size: 1.5rem;
+        align-self: center;
+    }
+
+    .contact-form label {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-form input {
+        font-size: 1rem;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .submit-btn {
+        margin-top: 10px;
+        font-size: 1.2rem;
+    }
+
+    .privacy-text {
+        font-size: 1.2rem;
+    }
+
+    .certificates-title {
+        font-size: 1.5rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1300px;
+        display: flex;
+    }
+    
+    .hero-title {     
+        font-size: 2.5rem; 
+    }
+    
+    .hero-text-card {
+        min-height: 180px; 
+        font-size: 1.5rem;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .contact-form h3 {
+        font-size: 2rem;
+        align-self: center;
+    }
+
+    .contact-form label {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+
+    .contact-form input {
+        font-size: 1.2rem;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .submit-btn {
+        margin-top: 10px;
+        font-size: 1.4rem;
+    }
+
+    .privacy-text {
+        font-size: 1.4rem;
+    }
+
+    .certificates-title {
+        font-size: 2rem;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

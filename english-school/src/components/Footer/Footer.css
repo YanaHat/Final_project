@@ -1,9 +1,7 @@
-.footer {
+footer {
   position: sticky;
   bottom: 0;
   z-index: 1000;
-  background-color: #ffff;
-
 }
 
 .container {
