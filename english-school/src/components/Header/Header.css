@@ -10,6 +10,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding:0;
 }
 
 .logo {
@@ -24,49 +25,11 @@ header {
   font-size: 20px;
 }
 
-header button {
-  margin-bottom: 10px;
-}
-
-@media (max-width: 1440px) {
-  header button {
-    font-size: 23px;
-    padding: 15px 20px;
-  }
-}
-
-@media (max-width: 1152px) {
-  header button {
-    font-size: 21px;
-    padding: 10px 15px;
-  }
-}
-
-@media (max-width: 1024px) {
-  header button {
-    font-size: 20px;
-    padding: 10px 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  header button {
-    font-size: 15px;
-    padding: 8px 13px;
-  }
-}
-
 @media (max-width: 425px) {
   .logo {
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
     width: 90%;
     margin-bottom: 10px;
-  }
-
-  header button {
-    font-size: 13px;
-    padding: 6px 11px;
   }
 }

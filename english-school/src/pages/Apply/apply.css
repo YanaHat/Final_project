@@ -11,8 +11,8 @@
 }
 
 .apply-subtitle {
-    text-align: center;
-    margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .apply-form {
@@ -53,12 +53,10 @@
   cursor: pointer;
 }
 
-@media (max-width: 1440px){}
-@media (max-width: 1280px){}
-@media (max-width: 1152px){}
-@media (max-width: 1024px){}
-@media (max-width: 800px){}
-@media (max-width: 768px){}
-@media (max-width: 425px) {}
+@media (max-width: 425px) {
+  .apply-title {
+    font-size: 20px;
+  }
+}
 @media (max-width: 375px){}
 @media (max-width: 320px) {}

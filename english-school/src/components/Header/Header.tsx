@@ -15,10 +15,6 @@ const Header = () => {
         </div>
 
         <Navigation />
-
-        <button onClick={context?.toggleTheme}>
-          Сменить тему
-        </button>
       </div>
     </header>
   );

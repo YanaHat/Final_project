@@ -5,15 +5,26 @@
 
   color-scheme: light dark;
   --bg: white;
+  --text: #8B5BD1;
   --card-bg: #ffff;
   --input-bg: white;
   --button-bg: #8B5BD1;
-  color: #8B5BD1;
+  --news-bg: white;
+  --news-txt: #555;
+  --courses-yellow-bg: #fdfdbd;
+  --courses-purple-bg: #d3c5ff;
+  --courses-green-bg: #e2ffbd;
+  --hero-bg: #B598FF;
+  --hero-card-bg: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -22,7 +33,7 @@ a {
   transition: color 0.3s;
 }
 a:hover {
-  color: #8B5BD1;
+  color: #a879ef;
 }
 
 body {
@@ -32,25 +43,38 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body.dark {
   --bg: #3b3b3b;
-  --text: #8B5BD1;
   --card-bg: #3b3b3b;
   --input-bg: #555;
+  --news-bg: #505050c4;
+  --news-txt: #cecece;
+  --courses-yellow-bg: #a8a864;
+  --courses-purple-bg: #9289ad;
+  --courses-green-bg: #9fb482;
+  --hero-bg: #917cc7;
+  --hero-card-bg: #a6a6a6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
 }
 
 header,
 footer {
   background: var(--card-bg);
+  transition: background 0.3s ease;
 }
 
 input,
 textarea {
   background: var(--input-bg);
   color: var(--text);
+  border: 1px solid #8B5BD1
 }
 
 
@@ -71,11 +95,13 @@ button {
   color: #ffff;
   transition: border-color 0.25s;
 }
+
 button:hover {
   background-color: #a879ef;
   color: #e5e5e5;
   border: none;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

@@ -6,7 +6,7 @@
 }
 
 .hero-purple {
-    background-color: #B598FF;
+    background-color: var(--hero-bg);
     border-radius: 20px;
     padding: 20px;
     color: white;
@@ -33,7 +33,7 @@
 }
 
 .hero-text-card {
-    background-color: #ffffff;
+    background-color: var(--hero-card-bg);
     color: #6A4BC1;
     padding: 20px;
     border-radius: 15px;
@@ -157,10 +157,6 @@
 }
 
 @media (min-width: 768px) {
-    .container { 
-        padding: 30px; 
-    }
-    
     .hero-title { 
         font-size: 2rem; 
     }
