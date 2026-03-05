@@ -59,6 +59,11 @@
     height: auto;
 }
 
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+}
+
 .contact-form input {
     border: 1px solid #6A4BC1;
 }

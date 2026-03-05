@@ -9,8 +9,8 @@ const Contacts = () => {
       <div className="contacts-content">
         <div className="contacts-info">
           <div className="contacts-info left">
-            <p><strong>Telegram: </strong><a href='https://t.me/englishprime_wroclaw'><SocialIcon url="https://telegram.com" style={{ width: 35, height: 35 }} /></a></p>
-            <p><strong>Instagram: </strong><a href='https://www.instagram.com/englishprime.wroclaw?igsh=dWc0YXZ6Z2FuZzM3&utm_source=qr'><SocialIcon url="https://instagram.com" style={{ width: 35, height: 35 }} /></a></p>
+            <p><strong>Telegram: </strong><SocialIcon url="https://t.me/englishprime_wroclaw" style={{ width: 35, height: 35 }} /></p>
+            <p><strong>Instagram: </strong><SocialIcon url="https://www.instagram.com/englishprime.wroclaw?igsh=dWc0YXZ6Z2FuZzM3&utm_source=qr" style={{ width: 35, height: 35 }} /></p>
           </div>
           <div className="contacts-info right">
             <a href="https://outlook.office.com/mail/deeplink/compose?mailtouri=mailto%3Aschool%40englishprime.plschool@englishprime.pl"><strong>Email: </strong>school@englishprime.pl</a>

@@ -18,12 +18,8 @@ const Social = () => {
         />
       </button>
 
-      <a href='https://t.me/englishprime_wroclaw' target="_blank" rel="noreferrer">
-        <SocialIcon url="https://telegram.com" style={{ width: 35, height: 35 }} />
-      </a>
-      <a href='https://www.instagram.com/englishprime.wroclaw?igsh=dWc0YXZ6Z2FuZzM3&utm_source=qr' target="_blank" rel="noreferrer">
-        <SocialIcon url="https://instagram.com" style={{ width: 35, height: 35 }} />
-      </a>
+      <SocialIcon url="https://t.me/englishprime_wroclaw" style={{ width: 35, height: 35 }} />
+      <SocialIcon url="https://www.instagram.com/englishprime.wroclaw?igsh=dWc0YXZ6Z2FuZzM3&utm_source=qr" style={{ width: 35, height: 35 }} />
     </div>
   );
 };

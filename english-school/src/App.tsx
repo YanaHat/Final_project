@@ -9,6 +9,8 @@ import FAQ from "./pages/FAQ/FAQ";
 import Apply from "./pages/Apply/Apply";
 import Contacts from "./pages/Contacts/Contacts";
 import News from "./pages/News/News";
+import Login from "./pages/Login/Login";
+import ProtectedRoute from "../src/components/ProtectedRoute";
 
 function App() {
   const location = useLocation();
@@ -19,10 +21,18 @@ function App() {
       <Header />
 
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<About />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/faq" element={<FAQ />} />
-        <Route path="/apply" element={<Apply />} />
+        <Route
+          path="/apply"
+          element={
+            <ProtectedRoute>
+              <Apply />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/news" element={<News />} />
       </Routes>

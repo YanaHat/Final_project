@@ -18,6 +18,7 @@ const Navigation = () => {
       </button>
 
       <ul className={`nav__list ${isOpen ? "active" : ""}`}>
+        <li><NavLink to="/login" onClick={closeMenu}>Логин</NavLink></li>
         <li><NavLink to="/" onClick={closeMenu}>О школе</NavLink></li>
         <li><NavLink to="/courses" onClick={closeMenu}>Обучение</NavLink></li>
         <li><NavLink to="/faq" onClick={closeMenu}>Вопросы</NavLink></li>

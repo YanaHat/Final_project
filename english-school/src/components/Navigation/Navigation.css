@@ -5,7 +5,7 @@
 
 .nav__list {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   list-style: none;
   font-weight: 500;
   color: #8B5BD1;
@@ -59,7 +59,7 @@
   .nav__list a {
     font-size: 22px;
     display: block;
-    padding: 10px;
+    padding: 8px;
   }
 }
 
@@ -71,12 +71,6 @@
 }
 
 @media (max-width: 800px) {
-  .nav__list a {
-    font-size: 17px;
-  }
-}
-
-@media (max-width: 768px) {
   .burger {
     display: block;
     z-index: 1001;
@@ -107,7 +101,7 @@
   }
 
   .nav__list a {
-    font-size: 18px;
+    font-size: 17px;
     display: block;
     padding: 10px;
   }

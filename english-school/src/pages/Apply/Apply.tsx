@@ -95,50 +95,26 @@ const Apply = () => {
 
         <label>
           Как с Вами связаться:
-          <input
-            type="text"
-            name="contactMethod"
-            value={formData.contactMethod}
-            onChange={handleChange}
-          />
+          <input type="text" name="contactMethod" id="contact" value={formData.contactMethod} onChange={handleChange}/>
         </label>
 
         <label>
           Телефон:
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
+          <input type="text" name="phone" id="phone" value={formData.phone} onChange={handleChange} />
         </label>
 
         <label>
           Имя пользователя Telegram/Instagram:
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-          />
+          <input type="text" name="username" id="name" value={formData.username} onChange={handleChange} />
         </label>
 
         <label>
           Сообщение:
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-          />
+          <textarea name="message" value={formData.message} onChange={handleChange} />
         </label>
 
         <label className="checkbox">
-          <input
-            type="checkbox"
-            name="agreement"
-            checked={formData.agreement}
-            onChange={handleChange}
-          />
+          <input type="checkbox" name="agreement" id="agreement" checked={formData.agreement} onChange={handleChange} />
           Я согласен/согласна с обработкой персональных данных
         </label>
 

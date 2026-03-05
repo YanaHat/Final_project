@@ -33,11 +33,15 @@ const About = () => {
           </div>
           <form className="contact-form">
             <h3>Записаться на пробное занятие</h3>
-            <label>Имя*</label>
-            <input type="text" placeholder="Ваше имя" required />
+            <label>
+              Имя*
+              <input type="text" name="name" id="name" placeholder="Ваше имя" required autoComplete="name"/>
+            </label>
             
-            <label>Телефон*</label>
-            <input type="tel" placeholder="Ваш телефон" required />
+            <label>
+              Телефон*
+              <input type="tel" name="phone" id="phone" placeholder="Ваш телефон" required autoComplete="tel"/>
+            </label>
             
             <button type="submit" className="submit-btn">Отправить</button>
             <p className="privacy-text">*Нажимая кнопку «Отправить» Вы соглашаетесь с <a href="https://englishprime.pl/politika/">политикой конфиденциальности</a></p>
