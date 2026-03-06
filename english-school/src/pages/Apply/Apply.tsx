@@ -1,8 +1,30 @@
 import { useState, useEffect } from "react";
 import "./Apply.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+
+  name: Yup.string()
+    .min(2, "Минимум 2 символа")
+    .required("Введите имя"),
+
+  email: Yup.string()
+    .email("Некорректный email")
+    .required("Введите email"),
+
+  phone: Yup.string()
+    .matches(/^[0-9+ ]*$/, "Только цифры"),
+
+  agreement: Yup.boolean()
+    .oneOf([true], "Необходимо согласие")
+
+});
 
 const Apply = () => {
-  const [formData, setFormData] = useState({
+
+  const [submitted, setSubmitted] = useState(false);
+  const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
     contactMethod: "",
@@ -12,51 +34,13 @@ const Apply = () => {
     agreement: false,
   });
 
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
-
   useEffect(() => {
     const savedData = localStorage.getItem("applicationData");
 
     if (savedData) {
-      setFormData(JSON.parse(savedData));
+      setInitialValues(JSON.parse(savedData));
     }
   }, []);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value, type } = e.target;
-
-    const checked =
-      type === "checkbox"
-        ? (e.target as HTMLInputElement).checked
-        : undefined;
-
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.name || !formData.email) {
-      setError("Пожалуйста, заполните обязательные поля.");
-      return;
-    }
-
-    if (!formData.agreement) {
-      setError("Необходимо согласие на обработку данных.");
-      return;
-    }
-
-    localStorage.setItem("applicationData", JSON.stringify(formData));
-
-    setError("");
-    setSubmitted(true);
-  };
 
   if (submitted) {
     return (
@@ -68,62 +52,80 @@ const Apply = () => {
 
   return (
     <section className="apply">
+
       <h1 className="apply-title">Подать заявку</h1>
 
       <p className="apply-subtitle">* - обязательное поле!</p>
 
-      <form className="apply-form" onSubmit={handleSubmit}>
-        <label>
-          Имя*:
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-        </label>
+      <Formik
 
-        <label>
-          Email*:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </label>
+        initialValues={initialValues}
 
-        <label>
-          Как с Вами связаться:
-          <input type="text" name="contactMethod" id="contact" value={formData.contactMethod} onChange={handleChange}/>
-        </label>
+        enableReinitialize
 
-        <label>
-          Телефон:
-          <input type="text" name="phone" id="phone" value={formData.phone} onChange={handleChange} />
-        </label>
+        validationSchema={validationSchema}
 
-        <label>
-          Имя пользователя Telegram/Instagram:
-          <input type="text" name="username" id="name" value={formData.username} onChange={handleChange} />
-        </label>
+        onSubmit={(values) => {
 
-        <label>
-          Сообщение:
-          <textarea name="message" value={formData.message} onChange={handleChange} />
-        </label>
+          localStorage.setItem(
+            "applicationData",
+            JSON.stringify(values)
+          );
 
-        <label className="checkbox">
-          <input type="checkbox" name="agreement" id="agreement" checked={formData.agreement} onChange={handleChange} />
-          Я согласен/согласна с обработкой персональных данных
-        </label>
+          setSubmitted(true);
 
-        {error && <p className="error">{error}</p>}
+        }}
+      >
 
-        <button type="submit" className="submit-btn">
-          Отправить заявку
-        </button>
-      </form>
+        <Form className="apply-form">
+
+          <label>
+            Имя*:
+            <Field type="text" name="name" />
+            <ErrorMessage name="name" component="div" className="error" />
+          </label>
+
+          <label>
+            Email*:
+            <Field type="email" name="email" />
+            <ErrorMessage name="email" component="div" className="error" />
+          </label>
+
+          <label>
+            Как с Вами связаться:
+            <Field type="text" name="contactMethod" />
+          </label>
+
+          <label>
+            Телефон:
+            <Field type="text" name="phone" />
+            <ErrorMessage name="phone" component="div" className="error" />
+          </label>
+
+          <label>
+            Имя пользователя Telegram/Instagram:
+            <Field type="text" name="username" />
+          </label>
+
+          <label>
+            Сообщение:
+            <Field as="textarea" name="message" />
+          </label>
+
+          <label className="checkbox">
+            <Field type="checkbox" name="agreement" /> Я согласен/согласна с обработкой персональных данных
+          </label>
+
+          <ErrorMessage name="agreement" component="div" className="error" />
+
+          <button type="submit" className="submit-btn">
+            Отправить заявку
+          </button>
+
+        </Form>
+
+      </Formik>
+
     </section>
   );
 };

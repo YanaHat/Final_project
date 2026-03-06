@@ -13,8 +13,8 @@ const Contacts = () => {
             <p><strong>Instagram: </strong><SocialIcon url="https://www.instagram.com/englishprime.wroclaw?igsh=dWc0YXZ6Z2FuZzM3&utm_source=qr" style={{ width: 35, height: 35 }} /></p>
           </div>
           <div className="contacts-info right">
-            <a href="https://outlook.office.com/mail/deeplink/compose?mailtouri=mailto%3Aschool%40englishprime.plschool@englishprime.pl"><strong>Email: </strong>school@englishprime.pl</a>
-            <p><strong>Телефон: </strong> +48 847 982 377</p>
+            <a href="mailto:englishprime.plschool@englishprime.pl"><strong>Email: </strong>school@englishprime.pl</a>
+            <p><strong>Телефон: </strong> <a href='tel:+48 847 982 377'>+48 847 982 377</a></p>
           </div>          
         </div>
 
