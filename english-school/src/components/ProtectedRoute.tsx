@@ -1,8 +1,12 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Navigate } from "react-router-dom";
 
-export default function ProtectedRoute({ children }: any) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function ProtectedRoute({ children }: Props) {
 
   const auth = useContext(AuthContext);
 

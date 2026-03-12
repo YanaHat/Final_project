@@ -45,6 +45,7 @@ body {
   color: var(--text);
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
+  display: grid;
 }
 
 body.dark {
