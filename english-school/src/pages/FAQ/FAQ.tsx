@@ -1,7 +1,8 @@
 import { useState } from "react";
-
 import "./FAQ.css";
 
+// Stała przechowująca bazę pytań i odpowiedzi. 
+// Dzięki temu treść jest oddzielona od struktury komponentu.
 const faqData = [
   {
     question: "На каких уровнях языка проходит обучение?",
@@ -15,7 +16,7 @@ const faqData = [
     question: "Есть ли онлайн-занятия?",
     answer: "Да, мы проводим занятия как онлайн, так и офлайн.",
   },
-    {
+  {
     question: "Сколько стоят занятия?",
     answer: "Стоимость одного занятия 90 минут — от 50 злотых. Оплата осуществляется помесячно или за семестр.",
   },
@@ -27,11 +28,11 @@ const faqData = [
     question: "Отличается ли программа при индивидуальном обучении?",
     answer: "Индивидуальные занятия проходят по тому же курсу, но с учетом Ваших потребностей, можно будет уделять больше внимания конкретным аспектам языка. То есть курс будет адаптироваться под Вас.",
   },
-    {
+  {
     question: "Есть ли онлайн-занятия?",
     answer: "Да, мы проводим занятия как онлайн, так и офлайн.",
   },
-    {
+  {
     question: "Как формируются группы?",
     answer: "Группы формируются в зависимости от уровня учащихся и удобного для них времени занятий.",
   },
@@ -41,6 +42,7 @@ const faqData = [
   },
   {
     question: "Как начать обучение?",
+    // Przykład odpowiedzi w formie tablicy (lista kroków)
     answer: [
       "Вы подаете заявку",
       "Мы с Вами связываемся",
@@ -53,48 +55,56 @@ const faqData = [
 ];
 
 const FAQ = () => {
+  // Stan przechowujący indeks aktualnie otwartego pytania.
+  // 'number' oznacza indeks, 'null' oznacza, że wszystkie są zamknięte.
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  // Funkcja przełączająca widoczność odpowiedzi.
+  // Jeśli klikniemy w już otwarte pytanie, zamknie się ono (ustawi null).
   const toggleItem = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
-return (
-  <section className="faq">
-    <h1 className="faq-title">Часто задаваемые вопросы</h1>
-    <p className="faq-subtitle">
-      Найди нужную информацию — мы уже ответили на большинство вопросов
-    </p>
 
-    <div className="faq-list">
-      {faqData.map((item, index) => (
-        <div key={index} className="faq-item">
-          <button
-            className="faq-question"
-            onClick={() => toggleItem(index)}
-          >
-            {item.question}
-          </button>
+  return (
+    <section className="faq">
+      <h1 className="faq-title">Часто задаваемые вопросы</h1>
+      <p className="faq-subtitle">Найди нужную информацию...</p>
 
-          {activeIndex === index && (
-            <div className="faq-answer">
-              {Array.isArray(item.answer) ? (
-                <ol>
-                  {item.answer.map((step, i) => (
-                    <li key={i}>{step}</li>
-                  ))}
-                </ol>
-              ) : (
-                item.answer
-              )}
-            </div>
-          )}
-        </div>   
-      ))}
-    </div>   
-    
-  </section>
-);
+      <div className="faq-list">
+        {/* Mapowanie danych z faqData na elementy interfejsu */}
+        {faqData.map((item, index) => (
+          <div key={index} className="faq-item">
+            {/* Przycisk pytania - po kliknięciu wywołuje toggleItem */}
+            <button
+              className="faq-question"
+              onClick={() => toggleItem(index)}
+            >
+              {item.question}
+            </button>
 
+            {/* Renderowanie warunkowe: odpowiedź pokaże się tylko, 
+                gdy activeIndex jest równy indeksowi danego elementu */}
+            {activeIndex === index && (
+              <div className="faq-answer">
+                {/* Sprawdzanie typu danych: 
+                    Jeśli odpowiedź jest tablicą, renderujemy listę numerowaną <ol>.
+                    W przeciwnym wypadku wyświetlamy zwykły tekst. */}
+                {Array.isArray(item.answer) ? (
+                  <ol>
+                    {item.answer.map((step, i) => (
+                      <li key={i}>{step}</li>
+                    ))}
+                  </ol>
+                ) : (
+                  item.answer
+                )}
+              </div>
+            )}
+          </div>   
+        ))}
+      </div>   
+    </section>
+  );
 };
 
 export default FAQ;
