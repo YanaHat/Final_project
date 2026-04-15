@@ -52,9 +52,9 @@ A website for an English language school in Wrocław. The project is built with 
 
 ## Installation and Setup
 
-1.Clone the repository:
+1. Clone the repository:
   git clone https://github.com/your-username/english-school.git
-2.Install dependencies:
+2. Install dependencies:
   npm install
-3.Run the project in development mode:
+3. Run the project in development mode:
   npm run dev
