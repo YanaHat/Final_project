@@ -23,3 +23,38 @@
   npm install
 3. Запустите проект в режиме разработки:
   npm run dev
+
+## English Prime 🇬🇧
+
+A website for an English language school in Wrocław. The project is built with React + TypeScript + Vite.
+
+## Features
+
+- **Courses**: Information about classes for adults, conversation clubs, and individual lessons.
+
+- **News**: Latest school updates (using a mock API service).
+
+- **FAQ**: Answers to frequently asked questions with an interactive interface.
+
+- **Theming**: Support for light and dark modes.
+
+- **Application Form**: A convenient form to sign up for a trial lesson.
+
+## Technologies
+
+- **React 18**
+
+- **TypeScript** (strict typing for components)
+
+- **Context API** (global state management for theme)
+
+- **CSS3** (responsive design, CSS variables)
+
+## Installation and Setup
+
+1.Clone the repository:
+  git clone https://github.com/your-username/english-school.git
+2.Install dependencies:
+  npm install
+3.Run the project in development mode:
+  npm run dev
