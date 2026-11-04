@@ -1,23 +1,27 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useLanguage } from "../../i18n/LanguageContext";
+import FieldError from "../../components/FieldError";
 import "./login.css";
+
+// В сообщениях — ключи ошибок, текст подставляется на текущем языке
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("emailInvalid")
+    .required("emailRequired"),
+  password: Yup.string()
+    .required("passwordRequired"),
+});
 
 export default function Login() {
 
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t, tError } = useLanguage();
   const [submitError, setSubmitError] = useState("");
-
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Некорректный email")
-      .required("Введите email"),
-    password: Yup.string()
-      .required("Введите пароль"),
-  });
 
   return (
 
@@ -32,7 +36,9 @@ export default function Login() {
           await auth?.login(values.email, values.password);
           navigate("/");
         } catch (error) {
-          setSubmitError(error instanceof Error ? error.message : "Не удалось войти");
+          setSubmitError(
+            error instanceof Error && error.message in t.errors ? error.message : "loginFailed"
+          );
         } finally {
           setSubmitting(false);
         }
@@ -43,42 +49,34 @@ export default function Login() {
 
       <Form className="login">
 
-        <h2>Вход</h2>
+        <h2>{t.login.title}</h2>
 
         <Field
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder={t.login.email}
           autoComplete="email"
         />
 
-        <ErrorMessage
-          name="email"
-          component="div"
-          className="error"
-        />
+        <FieldError name="email" />
 
         <Field
           type="password"
           name="password"
-          placeholder="Пароль"
+          placeholder={t.login.password}
           autoComplete="current-password"
         />
 
-        <ErrorMessage
-          name="password"
-          component="div"
-          className="error"
-        />
+        <FieldError name="password" />
 
-        {submitError && <div className="error">{submitError}</div>}
+        {submitError && <div className="error">{tError(submitError)}</div>}
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Вход..." : "Войти"}
+          {isSubmitting ? t.login.submitting : t.login.submit}
         </button>
 
         <p className="login__switch">
-          Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+          {t.login.noAccount} <Link to="/register">{t.login.toRegister}</Link>
         </p>
 
       </Form>

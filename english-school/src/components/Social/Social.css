@@ -34,6 +34,16 @@
   object-fit: contain;
 }
 
+.lang-toggle-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8B5BD1;
+}
+
+.dark .lang-toggle-btn {
+  color: white;
+}
+
 .theme-toggle-btn:hover {
   transform: scale(1.1);
 }

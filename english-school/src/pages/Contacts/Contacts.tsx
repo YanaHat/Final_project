@@ -1,10 +1,13 @@
 import { SocialIcon } from 'react-social-icons'
 import "./Contacts.css";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const Contacts = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="contacts">
-      <h1 className="contacts-title">Контакты</h1>
+      <h1 className="contacts-title">{t.contacts.title}</h1>
 
       <div className="contacts-content">
         <div className="contacts-info">
@@ -14,7 +17,7 @@ const Contacts = () => {
           </div>
           <div className="contacts-info right">
             <a href="mailto:englishprime.plschool@englishprime.pl"><strong>Email: </strong>school@englishprime.pl</a>
-            <p><strong>Телефон: </strong> <a href='tel:+48 847 982 377'>+48 847 982 377</a></p>
+            <p><strong>{t.contacts.phone} </strong> <a href='tel:+48 847 982 377'>+48 847 982 377</a></p>
           </div>          
         </div>
 

@@ -1,6 +1,8 @@
 import './About.css'
-import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from "formik"
+import { Formik, Form, Field, type FormikHelpers } from "formik"
 import * as Yup from "yup"
+import { useLanguage } from "../../i18n/LanguageContext"
+import FieldError from "../../components/FieldError"
 interface FormValues {
   name: string;
   phone: string;
@@ -8,21 +10,22 @@ interface FormValues {
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .min(2, "Минимум 2 символа")
-    .required("Введите имя"),
+    .min(2, "min2")
+    .required("nameRequired"),
   phone: Yup.string()
-    .matches(/^[0-9+\-\s()]*$/, "Неверный формат телефона")
-    .required("Введите телефон")
+    .matches(/^[0-9+\-\s()]*$/, "phoneInvalid")
+    .required("phoneRequired")
 })
 
 const About = () => {
+  const { t } = useLanguage();
 
 const handleSubmit = (
   values: FormValues, 
   { resetForm }: FormikHelpers<FormValues>
 ) => {
   console.log("Данные формы:", values);
-  alert("Заявка отправлена!");
+  alert(t.about.submitted);
   resetForm();
 };
 
@@ -31,24 +34,24 @@ const handleSubmit = (
       <div className="container">
 
         <div className="hero-purple">
-          <h2 className="hero-title">О школе English Prime</h2>
+          <h2 className="hero-title">{t.about.title}</h2>
 
           <div className="hero-grid">
             <div className="hero-image">
-              <img src="/src/assets/images/centrum.jpg" alt="Центр города" />
+              <img src="/src/assets/images/centrum.jpg" alt={t.about.cityCenterAlt} />
             </div>
             <div className="hero-text-card">
-              <p>Хорошее расположение в самом сердце города</p>
-              <p>Удобные классы с интерактивной доской</p>
+              <p>{t.about.location}</p>
+              <p>{t.about.classrooms}</p>
             </div>
 
             <div className="hero-text-card">
-              <p>Онлайн и оффлайн занятия</p>
-              <p>Опытные преподаватели</p>
-              <p>Уровни от A1 до C1</p>
+              <p>{t.about.format}</p>
+              <p>{t.about.teachers}</p>
+              <p>{t.about.levels}</p>
             </div>
             <div className="hero-image">
-              <img src="/src/assets/images/class.jpg" alt="Занятия" />
+              <img src="/src/assets/images/class.jpg" alt={t.about.classAlt} />
             </div>
           </div>
         </div>
@@ -56,7 +59,7 @@ const handleSubmit = (
         <div className="form-container">
 
           <div className="form-image">
-            <img src="/src/assets/images/form.png" alt="Иллюстрация" />
+            <img src="/src/assets/images/form.png" alt={t.about.illustrationAlt} />
           </div>
 
           <Formik
@@ -69,35 +72,35 @@ const handleSubmit = (
           >
 
             <Form className="contact-form">
-              <h3>Записаться на пробное занятие</h3>
+              <h3>{t.about.formTitle}</h3>
               <label>
-                Имя*
+                {t.about.name}
                 <Field
                   type="text"
                   name="name"
-                  placeholder="Ваше имя"
+                  placeholder={t.about.namePlaceholder}
                 />
-                <ErrorMessage name="name" component="div" className="error"/>
+                <FieldError name="name" />
               </label>
 
               <label>
-                Телефон*
+                {t.about.phone}
                 <Field
                   type="tel"
                   name="phone"
-                  placeholder="Ваш телефон"
+                  placeholder={t.about.phonePlaceholder}
                 />
-                <ErrorMessage name="phone" component="div" className="error"/>
+                <FieldError name="phone" />
               </label>
 
               <button type="submit" className="submit-btn">
-                Отправить
+                {t.about.submit}
               </button>
 
               <p className="privacy-text">
-                *Нажимая кнопку «Отправить» Вы соглашаетесь с
+                {t.about.privacyText}{" "}
                 <a href="https://englishprime.pl/politika/">
-                  политикой конфиденциальности
+                  {t.about.privacyLink}
                 </a>
               </p>
             </Form>
@@ -106,14 +109,14 @@ const handleSubmit = (
 
         <div className="certificates-section">
           <h3 className="certificates-title">
-            Сертификаты преподавателей
+            {t.about.certificatesTitle}
           </h3>
 
           <div className="certificates-grid">
-            <img src="/src/assets/images/cert1.png" alt="сертификат" />
-            <img src="/src/assets/images/cert2.png" alt="сертификат" />
-            <img src="/src/assets/images/cert3.png" alt="сертификат" />
-            <img src="/src/assets/images/cert4.png" alt="сертификат" />
+            <img src="/src/assets/images/cert1.png" alt={t.about.certificateAlt} />
+            <img src="/src/assets/images/cert2.png" alt={t.about.certificateAlt} />
+            <img src="/src/assets/images/cert3.png" alt={t.about.certificateAlt} />
+            <img src="/src/assets/images/cert4.png" alt={t.about.certificateAlt} />
           </div>
 
         </div>

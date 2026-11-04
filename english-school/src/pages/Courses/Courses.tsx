@@ -1,23 +1,26 @@
 import "./courses.css"
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const Courses = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="courses">
       <div className="container">
         <div className="courses-grid">
           <div className="card card--yellow">
-            <h3 className="cardTitle">Курсы английского языка для взрослых</h3>
-            <p>Мы ведем занятия по популярному курсу Cambridge. Один уровень проходим за 9 месяцев. По завершении уровня Вы получаете сертификат нашей школы. В рамках занятий домашние задания и тесты выполняются на платформе Cambridge. Занятия ведут опытные сертифицированные преподаватели, обладающие дипломами в области английской лингвистики и филологии.</p>
+            <h3 className="cardTitle">{t.courses.adultsTitle}</h3>
+            <p>{t.courses.adultsText}</p>
           </div>
 
           <div className="card card--purple">
-            <h3 className="cardTitle">Практика разговорного английского с носителем языка</h3>
-            <p>Наш преподаватель Эдвард обучает английскому уже 12 лет. Он подберет для Вас индивидуальную программу с учетом Ваших целей и потребностей. Занятия с Эдвардом — прекрасная возможность преодолеть языковой барьер и научиться не только понимать язык, но и уверенно выражать на нем свои мысли.</p>
+            <h3 className="cardTitle">{t.courses.nativeTitle}</h3>
+            <p>{t.courses.nativeText}</p>
           </div>
 
           <div className="card card--green">
-            <h3 className="cardTitle">Изучение английского с русскоязычным преподавателем индивидуально или в паре</h3>
-            <p>Такие занятия подойдут Вам, если у Вас плавающий график работы, либо Вы хотите, чтобы преподаватель подбирал для Вас индивидуальную программу.</p>
+            <h3 className="cardTitle">{t.courses.individualTitle}</h3>
+            <p>{t.courses.individualText}</p>
           </div>
         </div>
       </div>  

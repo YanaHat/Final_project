@@ -1,11 +1,13 @@
+import supabase from '../supabaseClient.ts';
+
 export interface NewsItem {
   id: string;
   title: string;
-  body: string;
-  imageUrl: string; 
+  content: string;
+  title_pl: string | null;
+  content_pl: string | null;
+  imageUrl: string;
 }
-
-import supabase from '../supabaseClient.ts'; 
 
 export const getNews = async (): Promise<NewsItem[]> => {
   const { data, error } = await supabase

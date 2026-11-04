@@ -2,36 +2,44 @@ import { useEffect, useState } from "react";
 import "./news.css";
 import { getNews} from "../../Services/getNews";
 import type { NewsItem } from "../../Services/getNews";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 const News = () => {
+  const { t, language } = useLanguage();
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getNews().then((data) => {
-      setNews(data);
-      setLoading(false);
-    });
+    getNews()
+      .then(setNews)
+      .catch(() => setNews([]))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="container"><p>Загрузка новостей...</p></div>;
+  if (loading) return <div className="container"><p>{t.news.loading}</p></div>;
 
   return (
     <section className="news-section">
       <div className="container">
-        <h1 className="news-page-title">Новости школы</h1>
+        <h1 className="news-page-title">{t.news.title}</h1>
         <div className="news-grid">
-          {news.map((item) => (
+          {news.map((item) => {
+            // Если польского перевода нет, показываем русский текст
+            const title = language === "pl" ? item.title_pl || item.title : item.title;
+            const content = language === "pl" ? item.content_pl || item.content : item.content;
+
+            return (
             <div key={item.id} className="news-card">
               <div className="news-image">
-                <img src={item.imageUrl} alt={item.title} />
+                <img src={item.imageUrl} alt={title} />
               </div>
               <div className="news-content">
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
+                <h3>{title}</h3>
+                <p>{content}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

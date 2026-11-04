@@ -1,6 +1,7 @@
 import { useContext, type ReactNode } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Navigate } from "react-router-dom";
+import { useLanguage } from "../i18n/LanguageContext";
 
 type Props = {
   children: ReactNode;
@@ -9,9 +10,10 @@ type Props = {
 export default function ProtectedRoute({ children }: Props) {
 
   const auth = useContext(AuthContext);
+  const { t } = useLanguage();
 
   if (auth?.loading) {
-    return <div>Loading...</div>;
+    return <div>{t.common.loading}</div>;
   }
 
   if (!auth?.user) {

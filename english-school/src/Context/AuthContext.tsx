@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, type ReactNode } from "react";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import supabase from "../supabaseClient";
 import { createStudent, StudentExistsError, type StudentProfile } from "../Services/students";
+import type { ErrorKey } from "../i18n/ru";
 
 type User = {
   id: string;
@@ -27,12 +28,13 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 const toUser = (user: SupabaseUser | null | undefined): User =>
   user ? { id: user.id, email: user.email ?? "" } : null;
 
-const translateAuthError = (message: string): string => {
-  if (message.includes("Invalid login credentials")) return "Неверный email или пароль";
-  if (message.includes("Email not confirmed")) return "Подтвердите email по ссылке из письма";
-  if (message.includes("already registered")) return new StudentExistsError().message;
-  if (message.includes("Password should be")) return "Пароль слишком простой или короткий";
-  return "Что-то пошло не так. Попробуйте ещё раз.";
+// Возвращает ключ перевода ошибки; сам текст выводится на странице на текущем языке
+const translateAuthError = (message: string): ErrorKey => {
+  if (message.includes("Invalid login credentials")) return "invalidCredentials";
+  if (message.includes("Email not confirmed")) return "emailNotConfirmed";
+  if (message.includes("already registered")) return "emailExists";
+  if (message.includes("Password should be")) return "weakPassword";
+  return "unknown";
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {

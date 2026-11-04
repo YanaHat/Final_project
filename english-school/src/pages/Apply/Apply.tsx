@@ -1,10 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import "./apply.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../../Context/AuthContext";
 import { getStudent, saveStudent, StudentExistsError } from "../../Services/students";
 import { createApplication } from "../../Services/applications";
+import { useLanguage } from "../../i18n/LanguageContext";
+import FieldError from "../../components/FieldError";
 
 type ApplyValues = {
   firstName: string;
@@ -19,28 +21,29 @@ type ApplyValues = {
   agreement: boolean;
 };
 
+// В сообщениях — ключи ошибок, текст подставляется на текущем языке
 const validationSchema = Yup.object({
 
   firstName: Yup.string()
-    .min(2, "Минимум 2 символа")
-    .required("Введите имя"),
+    .min(2, "min2")
+    .required("nameRequired"),
 
   lastName: Yup.string()
-    .min(2, "Минимум 2 символа")
-    .required("Введите фамилию"),
+    .min(2, "min2")
+    .required("lastNameRequired"),
 
   email: Yup.string()
-    .email("Некорректный email")
-    .required("Введите email"),
+    .email("emailInvalid")
+    .required("emailRequired"),
 
   birthDate: Yup.date()
-    .max(new Date(), "Дата не может быть в будущем"),
+    .max(new Date(), "dateInFuture"),
 
   phone: Yup.string()
-    .matches(/^[0-9+ ]*$/, "Только цифры"),
+    .matches(/^[0-9+ ]*$/, "phoneDigits"),
 
   agreement: Yup.boolean()
-    .oneOf([true], "Необходимо согласие")
+    .oneOf([true], "agreementRequired")
 
 });
 
@@ -60,6 +63,7 @@ const emptyValues: ApplyValues = {
 const Apply = () => {
 
   const auth = useContext(AuthContext);
+  const { t, tError } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [initialValues, setInitialValues] = useState<ApplyValues>(emptyValues);
@@ -97,7 +101,7 @@ const Apply = () => {
   if (submitted) {
     return (
       <section className="apply">
-        <h2>Спасибо! Ваша заявка отправлена.</h2>
+        <h2>{t.apply.success}</h2>
       </section>
     );
   }
@@ -105,9 +109,9 @@ const Apply = () => {
   return (
     <section className="apply">
 
-      <h1 className="apply-title">Подать заявку</h1>
+      <h1 className="apply-title">{t.apply.title}</h1>
 
-      <p className="apply-subtitle">* - обязательное поле!</p>
+      <p className="apply-subtitle">{t.common.requiredHint}</p>
 
       <Formik
 
@@ -127,7 +131,7 @@ const Apply = () => {
           );
 
           try {
-            if (!userId) throw new Error("Пользователь не авторизован");
+            if (!userId) throw new Error("unknown");
 
             await saveStudent({
               id: userId,
@@ -150,9 +154,7 @@ const Apply = () => {
             setSubmitted(true);
           } catch (error) {
             setSubmitError(
-              error instanceof StudentExistsError
-                ? "Этот email уже занят другой записью в таблице students. Удалите старую запись в Supabase."
-                : "Не удалось отправить заявку. Попробуйте ещё раз."
+              error instanceof StudentExistsError ? "applyEmailTaken" : "applyFailed"
             );
           } finally {
             setSubmitting(false);
@@ -166,33 +168,33 @@ const Apply = () => {
         <Form className="apply-form">
 
           <label>
-            Имя*:
+            {t.apply.firstName}
             <Field type="text" name="firstName" />
-            <ErrorMessage name="firstName" component="div" className="error" />
+            <FieldError name="firstName" />
           </label>
 
           <label>
-            Фамилия*:
+            {t.apply.lastName}
             <Field type="text" name="lastName" />
-            <ErrorMessage name="lastName" component="div" className="error" />
+            <FieldError name="lastName" />
           </label>
 
           <label>
-            Email*:
+            {t.apply.email}
             <Field type="email" name="email" readOnly />
-            <ErrorMessage name="email" component="div" className="error" />
+            <FieldError name="email" />
           </label>
 
           <label>
-            Дата рождения:
+            {t.apply.birthDate}
             <Field type="date" name="birthDate" />
-            <ErrorMessage name="birthDate" component="div" className="error" />
+            <FieldError name="birthDate" />
           </label>
 
           <label>
-            Уровень английского:
+            {t.apply.level}
             <Field as="select" name="level">
-              <option value="">Не знаю</option>
+              <option value="">{t.common.levelUnknown}</option>
               <option value="A1">A1</option>
               <option value="A2">A2</option>
               <option value="B1">B1</option>
@@ -203,36 +205,36 @@ const Apply = () => {
           </label>
 
           <label>
-            Как с Вами связаться:
+            {t.apply.contactMethod}
             <Field type="text" name="contactMethod" />
           </label>
 
           <label>
-            Телефон:
+            {t.apply.phone}
             <Field type="text" name="phone" />
-            <ErrorMessage name="phone" component="div" className="error" />
+            <FieldError name="phone" />
           </label>
 
           <label>
-            Имя пользователя Telegram/Instagram:
+            {t.apply.username}
             <Field type="text" name="username" />
           </label>
 
           <label>
-            Сообщение:
+            {t.apply.message}
             <Field as="textarea" name="message" />
           </label>
 
           <label className="checkbox">
-            <Field type="checkbox" name="agreement" /> Я согласен/согласна с обработкой персональных данных
+            <Field type="checkbox" name="agreement" /> {t.apply.agreement}
           </label>
 
-          <ErrorMessage name="agreement" component="div" className="error" />
+          <FieldError name="agreement" />
 
-          {submitError && <div className="error">{submitError}</div>}
+          {submitError && <div className="error">{tError(submitError)}</div>}
 
           <button type="submit" className="submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? "Отправка..." : "Отправить заявку"}
+            {isSubmitting ? t.apply.submitting : t.apply.submit}
           </button>
 
         </Form>

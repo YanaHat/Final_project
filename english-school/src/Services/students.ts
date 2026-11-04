@@ -22,7 +22,7 @@ const UNIQUE_VIOLATION = '23505';
 
 export class StudentExistsError extends Error {
   constructor() {
-    super('Пользователь с таким email уже зарегистрирован');
+    super('emailExists'); // ключ перевода из i18n
     this.name = 'StudentExistsError';
   }
 }

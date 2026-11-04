@@ -1,37 +1,40 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useLanguage } from "../../i18n/LanguageContext";
+import FieldError from "../../components/FieldError";
 import "../Login/login.css";
 
+// В сообщениях — ключи ошибок, текст подставляется на текущем языке
 const validationSchema = Yup.object({
 
   firstName: Yup.string()
-    .min(2, "Минимум 2 символа")
-    .required("Введите имя"),
+    .min(2, "min2")
+    .required("nameRequired"),
 
   lastName: Yup.string()
-    .min(2, "Минимум 2 символа")
-    .required("Введите фамилию"),
+    .min(2, "min2")
+    .required("lastNameRequired"),
 
   email: Yup.string()
-    .email("Некорректный email")
-    .required("Введите email"),
+    .email("emailInvalid")
+    .required("emailRequired"),
 
   password: Yup.string()
-    .min(6, "Минимум 6 символов")
-    .required("Введите пароль"),
+    .min(6, "min6")
+    .required("passwordRequired"),
 
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Пароли не совпадают")
-    .required("Повторите пароль"),
+    .oneOf([Yup.ref("password")], "passwordsMismatch")
+    .required("confirmPasswordRequired"),
 
   phone: Yup.string()
-    .matches(/^[0-9+ ]*$/, "Только цифры"),
+    .matches(/^[0-9+ ]*$/, "phoneDigits"),
 
   birthDate: Yup.date()
-    .max(new Date(), "Дата не может быть в будущем"),
+    .max(new Date(), "dateInFuture"),
 
 });
 
@@ -39,14 +42,15 @@ export default function Register() {
 
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+  const { t, tError } = useLanguage();
   const [submitError, setSubmitError] = useState("");
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
 
   if (needsConfirmation) {
     return (
       <section className="login">
-        <h2>Почти готово!</h2>
-        <p>Мы отправили письмо на вашу почту. Подтвердите email, затем <Link to="/login">войдите</Link>.</p>
+        <h2>{t.register.confirmTitle}</h2>
+        <p>{t.register.confirmTextBefore} <Link to="/login">{t.register.confirmLink}</Link>.</p>
       </section>
     );
   }
@@ -86,7 +90,9 @@ export default function Register() {
             navigate("/");
           }
         } catch (error) {
-          setSubmitError(error instanceof Error ? error.message : "Не удалось зарегистрироваться");
+          setSubmitError(
+            error instanceof Error && error.message in t.errors ? error.message : "registerFailed"
+          );
         } finally {
           setSubmitting(false);
         }
@@ -97,34 +103,34 @@ export default function Register() {
 
       <Form className="login">
 
-        <h2>Регистрация</h2>
+        <h2>{t.register.title}</h2>
 
-        <Field type="text" name="firstName" placeholder="Имя*" autoComplete="given-name" />
-        <ErrorMessage name="firstName" component="div" className="error" />
+        <Field type="text" name="firstName" placeholder={t.register.firstName} autoComplete="given-name" />
+        <FieldError name="firstName" />
 
-        <Field type="text" name="lastName" placeholder="Фамилия*" autoComplete="family-name" />
-        <ErrorMessage name="lastName" component="div" className="error" />
+        <Field type="text" name="lastName" placeholder={t.register.lastName} autoComplete="family-name" />
+        <FieldError name="lastName" />
 
-        <Field type="email" name="email" placeholder="Email*" autoComplete="email" />
-        <ErrorMessage name="email" component="div" className="error" />
+        <Field type="email" name="email" placeholder={t.register.email} autoComplete="email" />
+        <FieldError name="email" />
 
-        <Field type="password" name="password" placeholder="Пароль*" autoComplete="new-password" />
-        <ErrorMessage name="password" component="div" className="error" />
+        <Field type="password" name="password" placeholder={t.register.password} autoComplete="new-password" />
+        <FieldError name="password" />
 
-        <Field type="password" name="confirmPassword" placeholder="Повторите пароль*" autoComplete="new-password" />
-        <ErrorMessage name="confirmPassword" component="div" className="error" />
+        <Field type="password" name="confirmPassword" placeholder={t.register.confirmPassword} autoComplete="new-password" />
+        <FieldError name="confirmPassword" />
 
-        <Field type="text" name="phone" placeholder="Телефон" autoComplete="tel" />
-        <ErrorMessage name="phone" component="div" className="error" />
+        <Field type="text" name="phone" placeholder={t.register.phone} autoComplete="tel" />
+        <FieldError name="phone" />
 
         <label className="login__label">
-          Дата рождения:
+          {t.register.birthDate}
           <Field type="date" name="birthDate" />
         </label>
-        <ErrorMessage name="birthDate" component="div" className="error" />
+        <FieldError name="birthDate" />
 
         <Field as="select" name="level">
-          <option value="">Уровень английского: не знаю</option>
+          <option value="">{t.register.level}</option>
           <option value="A1">A1</option>
           <option value="A2">A2</option>
           <option value="B1">B1</option>
@@ -133,14 +139,14 @@ export default function Register() {
           <option value="C2">C2</option>
         </Field>
 
-        {submitError && <div className="error">{submitError}</div>}
+        {submitError && <div className="error">{tError(submitError)}</div>}
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Регистрация..." : "Зарегистрироваться"}
+          {isSubmitting ? t.register.submitting : t.register.submit}
         </button>
 
         <p className="login__switch">
-          Уже есть аккаунт? <Link to="/login">Войти</Link>
+          {t.register.haveAccount} <Link to="/login">{t.register.toLogin}</Link>
         </p>
 
       </Form>
