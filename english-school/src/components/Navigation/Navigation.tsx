@@ -23,7 +23,10 @@ const Navigation = () => {
 
       <ul className={`nav__list ${isOpen ? "active" : ""}`}>
         {!auth?.user && (
-          <li><NavLink to="/login" onClick={closeMenu}>Логин</NavLink></li>
+          <>
+            <li><NavLink to="/login" onClick={closeMenu}>Логин</NavLink></li>
+            <li><NavLink to="/register" onClick={closeMenu}>Регистрация</NavLink></li>
+          </>
         )}
         {auth?.user && (
           <li><button onClick={auth.logout}>Logout</button></li>

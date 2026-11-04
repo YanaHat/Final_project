@@ -10,6 +10,7 @@ import Apply from "./pages/Apply/Apply";
 import Contacts from "./pages/Contacts/Contacts";
 import News from "./pages/News/News";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import ProtectedRoute from "../src/components/ProtectedRoute";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/" element={<About />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/faq" element={<FAQ />} />

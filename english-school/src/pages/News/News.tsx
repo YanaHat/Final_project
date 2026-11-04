@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./news.css";
-import { getNews} from "../../Services/api";
-import type { NewsItem } from "../../Services/api";
+import { getNews} from "../../Services/getNews";
+import type { NewsItem } from "../../Services/getNews";
 
 const News = () => {
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -24,7 +24,7 @@ const News = () => {
           {news.map((item) => (
             <div key={item.id} className="news-card">
               <div className="news-image">
-                <img src={item.image} alt={item.title} />
+                <img src={item.imageUrl} alt={item.title} />
               </div>
               <div className="news-content">
                 <h3>{item.title}</h3>
